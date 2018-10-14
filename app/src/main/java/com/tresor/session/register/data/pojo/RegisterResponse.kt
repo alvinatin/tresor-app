@@ -8,10 +8,11 @@ import com.google.gson.annotations.SerializedName
  */
 
 data class RegisterResponse(@SerializedName("Fields") @Expose
-                            val data: RegisterDetailResponse) {
-    data class RegisterDetailResponse(@SerializedName("Field") @Expose
+                            val data: RegisterDetailResponse)
+
+data class RegisterDetailResponse(@SerializedName("field") @Expose
                                       val field: String,
-                                      @SerializedName("Message") @Expose
+                                      @SerializedName("message") @Expose
                                       val message: String)
-}
+
 

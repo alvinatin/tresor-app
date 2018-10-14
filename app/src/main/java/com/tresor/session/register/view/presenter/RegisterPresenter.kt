@@ -2,6 +2,7 @@ package com.tresor.session.register.view.presenter
 
 import com.tresor.TresorApp
 import com.tresor.base.BasePresenter
+import com.tresor.common.network.interceptor.UnprocessableEntityError
 import com.tresor.session.common.api.SessionApi
 import com.tresor.session.common.api.SessionRequestBody
 import com.tresor.session.common.di.SessionComponent
@@ -28,23 +29,9 @@ class RegisterPresenter(registerView: RegisterView) : BasePresenter<RegisterView
 
     private var subscription: Disposable? = null
 
-//    private val initInjector: SessionComponent =
-//            DaggerSessionComponent.builder()
-//                    .baseAppComponent((view.getContext().applicationContext as TresorApp).
-//                            getBaseAppComponent)
-//                    .sessionModule(SessionModule())
-//                    .build()
-
-
     override fun onViewCreated() {
         super.onViewCreated()
     }
-
-//    init {
-//        initInjector.inject(this)
-//    }
-
-
 
     override fun onViewDestroyed() {
         subscription?.dispose()
@@ -60,7 +47,7 @@ class RegisterPresenter(registerView: RegisterView) : BasePresenter<RegisterView
                 .doOnTerminate { view.showLoading() }
                 .subscribe(
                         { model: RegisterViewModel -> onSuccess(model) },
-                        { e -> view.showError(e.message) }
+                        { e -> onError(e) }
                 )
     }
 
@@ -69,6 +56,17 @@ class RegisterPresenter(registerView: RegisterView) : BasePresenter<RegisterView
             view.onSuccesRegister(registerViewModel)
         } else {
             view.onErrorRegister(registerViewModel)
+        }
+    }
+
+    fun onError(e : Throwable){
+        when (e) {
+            is UnprocessableEntityError -> e.errorBody.iterator().forEach { error ->
+                when (error.field) {
+                    "email" -> view.showEmailError(error.message)
+                    "password" -> view.showPasswordError(error.message)
+                }
+            }
         }
     }
 

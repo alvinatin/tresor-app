@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#177c0f</color>
     <color name="colorAccent">#dddfd4</color>
 
+    <color name="errorRed">#ff0000</color>
+
     <color name="colorMain">#c9d8c5</color>
     <color name="colorSecondary">#c5e1a5</color>
     <color name="colorContrast">#fff9c4</color>

@@ -5,7 +5,5 @@ package com.tresor.session.register.view
  */
 
 data class RegisterViewModel(val isRegistered: Boolean,
-                             val fields: Fields? = null) {
-    data class Fields(val field: String,
-                      val message: String)
-}
+                             val field: String,
+                             val message: String)

@@ -6,6 +6,7 @@ import com.tresor.base.BaseUrl
 import com.tresor.common.di.qualifier.ApplicationContext
 import com.tresor.common.di.scope.ApplicationScope
 import com.tresor.common.network.OkHttpRetryPolicy
+import com.tresor.common.network.interceptor.NetworkInterceptor
 import com.tresor.common.utils.NET_CONNECT_TIMEOUT
 import com.tresor.common.utils.NET_READ_TIMEOUT
 import com.tresor.common.utils.NET_RETRY
@@ -42,6 +43,7 @@ object NetworkModule {
                 .readTimeout(okHttpRetryPolicy.readTimeout, TimeUnit.SECONDS)
                 .writeTimeout(okHttpRetryPolicy.readTimeout, TimeUnit.SECONDS)
                 .addInterceptor(okHttpLoggingInterceptor)
+                .addInterceptor(NetworkInterceptor())
                 .build()
     }
 

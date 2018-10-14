@@ -1,11 +1,14 @@
 package com.tresor.session.register.view.activity
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import com.tresor.R
+import com.tresor.R.id.*
 import com.tresor.TresorApp
 import com.tresor.base.BaseActivity
 import com.tresor.session.common.di.DaggerSessionComponent
@@ -59,9 +62,20 @@ class RegisterActivity : BaseActivity<RegisterPresenter>(), RegisterView {
     }
 
     override fun onErrorRegister(registerViewModel: RegisterViewModel) {
+        Toast.makeText(this, "error broh", Toast.LENGTH_LONG).show()
     }
 
     override fun showError(error: String?) {
         Toast.makeText(this, error, Toast.LENGTH_LONG).show()
+    }
+
+    override fun showEmailError(error: String?) {
+        error_email.text = error
+        error_email.visibility = View.VISIBLE
+    }
+
+    override fun showPasswordError(error: String?) {
+        error_password.text = error
+        error_email.visibility = View.VISIBLE
     }
 }

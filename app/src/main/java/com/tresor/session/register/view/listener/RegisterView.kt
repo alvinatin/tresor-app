@@ -20,4 +20,8 @@ interface RegisterView : BaseView {
     fun onErrorRegister(registerViewModel: RegisterViewModel)
 
     fun showError(error: String?)
+
+    fun showEmailError(error: String?)
+
+    fun showPasswordError(error: String?)
 }
